@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Display from "./display";
+import Button_section from "./button_section";
+const App = () => {
+  let [startCalc, setStartCalc] = useState(true);
 
-function App() {
-  const [count, setCount] = useState(0)
+  let [numbers, setNumbers] = useState({
+    firstNumber: undefined,
+    operator: undefined,
+    secondNumber: undefined,
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="calculator">
+      <h1>calculator</h1>
+      <Display numbers={numbers}></Display>
+      <Button_section
+        numbers={numbers}
+        setNumbers={setNumbers}
+      ></Button_section>
+    </div>
+  );
+};
 
-export default App
+export default App;
