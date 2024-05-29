@@ -3,6 +3,7 @@ import Display from "./display";
 import Button_section from "./button_section";
 const App = () => {
   let [startCalc, setStartCalc] = useState(true);
+  let [continueSum, setContinueSum] = useState(false);
 
   let [numbers, setNumbers] = useState({
     firstNumber: "",
@@ -55,6 +56,15 @@ const App = () => {
     }));
   }
 
+  function setFirstNew(digit) {
+    console.log("set new");
+    console.log("digit" + digit);
+    setNumbers((prevState) => ({
+      ...prevState,
+      firstNumber: "" + digit,
+    }));
+  }
+
   function setSecond(digit) {
     let current = numbers.secondNumber;
     let newDigit = current + digit;
@@ -87,9 +97,14 @@ const App = () => {
     console.log(numbers);
     const operators = ["+", "-", "/", "*"];
     if (digit == "=") {
+      if (numbers.operator == "") {
+        return;
+      }
       calculate();
       numbers.operator = "";
       numbers.secondNumber = "";
+      setStartCalc(true);
+      setContinueSum(true);
       return;
     }
     if (operators.includes(digit)) {
@@ -99,6 +114,11 @@ const App = () => {
     }
 
     if (startCalc) {
+      if (continueSum) {
+        setFirstNew(digit);
+        setContinueSum(false);
+        return;
+      }
       setFirst(digit);
     } else {
       setSecond(digit);
