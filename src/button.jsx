@@ -1,7 +1,7 @@
-const Button = ({ value }) => {
+const Button = ({ value, handleChange }) => {
   return (
     <>
-      <button onClick={() => console.log("test")}>{value}</button>
+      <button onClick={() => handleChange(value)}>{value}</button>
     </>
   );
 };
